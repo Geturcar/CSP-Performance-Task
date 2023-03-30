@@ -28,12 +28,12 @@ class Character:
         self.height = height
     def move(self, _speed):
         self.x-= _speed * d_t
-        for cc in slave_chara:
+        for cc in chara_under:
             cc.move(_speed)
     def draw(self):
         Char1= pygame.Rect(self.x,self.y, self.width, self.height)
         pygame.draw.rect(screen, 'red', Char1)
-        for cc in slave_chara:
+        for cc in chara_under:
             cc.draw()
 
 class Character2(Character):
@@ -47,7 +47,7 @@ class Character2(Character):
         pygame.draw.rect(screen, 'red', Char1)
 
 chara = Character(Char1_posx, Char1_posy, 50,50)
-slave_chara = [Character2(Char1_posx, Char1_posy, 50,50, 800), Character2(Char1_posx, Char1_posy+20,800, 10,0)]
+chara_under = [Character2(Char1_posx, Char1_posy, 50,50, 800), Character2(Char1_posx, Char1_posy+20,800, 10,0)]
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
