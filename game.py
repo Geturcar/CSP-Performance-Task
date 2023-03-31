@@ -5,106 +5,108 @@ body_list = ["body1.png","body2.png", "body3.png"]
 leg_list = ["leg1.png","leg2.png", "leg3.png"]
 
 print("Player 1 skin select")
-while True:
-        Head = input("Select a head (Buisnessman, Gamer, King): ")
-        if Head.lower == "buisnessman":
-            print ("You have selected the Buisnessman head")
-            index_head = 0
-            break
-        elif Head.lower == "gamer":
-            print ("You have selected the Gamer head")
-            index_head = 1
-            break
-        elif Head.lower == "king":
-            print ("You have selected the King head")
-            index_head = 2
-            break
-        else:
-            print("Please select one of the given heads")  
 
 while True:
-        Body = input("Select a body (Buisnessman, Gamer, King): ")
-        if Body.lower == "buisnessman":
-            print ("You have selected the Buisnessman body")
-            index_body = 0
-            break
-        elif Body.lower == "gamer":
-            print ("You have selected the Gamer body")
-            index_body = 1
-            break
-        elif Body.lower == "king":
-            print ("You have selected the King body")
-            index_body = 2
-            break
-        else:
-            print("Please select one of the given bodies")
+    Head = input("Select a head (Buisnessman, Gamer, King): ")
+    if Head == "buisnessman":
+        print ("You have selected the Buisnessman head")
+        index_head = 0
+        break
+    elif Head == "gamer":
+        print ("You have selected the Gamer head")
+        index_head = 1
+        break
+    elif Head == "king":
+        print ("You have selected the King head")
+        index_head = 2
+        break
+    else:
+        print("Please select one of the given heads")  
+
+print("body")
 while True:
-        Legs = input("Select a body (Buisnessman, Gamer, King): ")
-        if Legs.lower == "buisnessman":
-            print ("You have selected the Buisnessman legs")
-            index_legs = 0
-            break
-        elif Legs.lower == "gamer":
-            print ("You have selected the Gamer legs")
-            index_legs = 1
-            break
-        elif Legs.lower == "king":
-            print ("You have selected the King legs")
-            index_legs = 2
-            break
-        else:
-            print("Please select one of the given legs")
+    Body = input("Select a body (Buisnessman, Gamer, King): ")
+    if Body == "buisnessman":
+        print ("You have selected the Buisnessman body")
+        index_body = 0
+        break
+    elif Body == "gamer":
+        print ("You have selected the Gamer body")
+        index_body = 1
+        break
+    elif Body == "king":
+        print ("You have selected the King body")
+        index_body = 2
+        break
+    else:
+        print("Please select one of the given bodies")
+while True:
+    Legs = input("Select legs (Buisnessman, Gamer, King): ")
+    if Legs == "buisnessman":
+        print ("You have selected the Buisnessman legs")
+        index_legs = 0
+        break
+    elif Legs == "gamer":
+        print ("You have selected the Gamer legs")
+        index_legs = 1
+        break
+    elif Legs == "king":
+        print ("You have selected the King legs")
+        index_legs = 2
+        break
+    else:
+        print("Please select one of the given legs")
 
 print("Player 2 skin select")
 while True:
-        Head2 = input("Select a head (Buisnessman, Gamer, King): ")
-        if Head2.lower == "buisnessman":
-            print ("You have selected the Buisnessman head")
-            index_head2 = 0
-            break
-        elif Head2.lower == "gamer":
-            print ("You have selected the Gamer head")
-            index_head2 = 1
-            break
-        elif Head2.lower == "king":
-            print ("You have selected the King head")
-            index_head2 = 2
-            break
-        else:
-            print("Please select one of the given heads")  
+    Head2 = input("Select a head (Buisnessman, Gamer, King): ")
+    if Head2 == "buisnessman":
+        print ("You have selected the Buisnessman head")
+        index_head2 = 0
+        break
+    elif Head2 == "gamer":
+        print ("You have selected the Gamer head")
+        index_head2 = 1
+        break
+    elif Head2 == "king":
+        print ("You have selected the King head")
+        index_head2 = 2
+        break
+    else:
+        print("Please select one of the given heads")  
 
 while True:
-        Body2 = input("Select a body (Buisnessman, Gamer, King): ")
-        if Body2.lower == "buisnessman":
-            print ("You have selected the Buisnessman body")
-            index_body2 = 0
-            break
-        elif Body2.lower == "gamer":
-            print ("You have selected the Gamer body")
-            index_body2 = 1
-            break
-        elif Body2.lower == "king":
-            print ("You have selected the King body")
-            index_body2 = 2
-            break
-        else:
-            print("Please select one of the given bodies")
+    Body2 = input("Select a body (Buisnessman, Gamer, King): ")
+    if Body2 == "buisnessman":
+        print("You have selected the Buisnessman body")
+        index_body2 = 0
+        break
+    elif Body2 == "gamer":
+        print ("You have selected the Gamer body")
+        index_body2 = 1
+        break
+    elif Body2 == "king":
+        print ("You have selected the King body")
+        index_body2 = 2
+        break
+    else:
+        print("Please select one of the given bodies")
 while True:
-        Legs2 = input("Select a body (Buisnessman, Gamer, King): ")
-        if Legs2.lower == "buisnessman":
-            print ("You have selected the Buisnessman legs")
-            index_legs2 = 0
-            break
-        elif Legs2.lower == "gamer":
-            print ("You have selected the Gamer legs")
-            index_legs2 = 1
-            break
-        elif Legs2.lower == "king":
-            print ("You have selected the King legs")
-            index_legs2 = 2
-            break
-        else:
-            print("Please select one of the given legs")
+    Legs2 = input("Select legs (Buisnessman, Gamer, King): ")
+    if Legs2 == "buisnessman":
+        print ("You have selected the Buisnessman legs")
+        index_legs2 = 0
+        break
+    elif Legs2 == "gamer":
+        print ("You have selected the Gamer legs")
+        index_legs2 = 1
+        break
+    elif Legs2 == "king":
+        print ("You have selected the King legs")
+        index_legs2 = 2
+        break
+    else:
+        print("Please select one of the given legs")
 
 head_item = head_list[index_head]
 body_item = body_list[index_body]
