@@ -1,8 +1,8 @@
 import pygame, sys
 
-head_list = ["head1.png","head2.png", "head3.png"]
-body_list = ["body1.png","body2.png", "body3.png"]
-leg_list = ["leg1.png","leg2.png", "leg3.png"]
+head_list = ["Images/head1.png","Images/head2.png", "Images/head3.png"]
+body_list = ["Images/body1.png","Images/body2.png", "Images/body3.png"]
+shoe_list = ["Images/shoe1.png","Images/shoe2.png", "Images/shoe3.png"]
 
 print("Player 1 skin select")
 
@@ -41,21 +41,21 @@ while True:
     else:
         print("Please select one of the given bodies")
 while True:
-    Legs = input("Select legs (Buisnessman, Gamer, King): ")
-    if Legs == "buisnessman":
-        print ("You have selected the Buisnessman legs")
-        index_legs = 0
+    shoes = input("Select shoes (Buisnessman, Gamer, King): ")
+    if shoes == "buisnessman":
+        print ("You have selected the Buisnessman shoes")
+        index_shoes = 0
         break
-    elif Legs == "gamer":
-        print ("You have selected the Gamer legs")
-        index_legs = 1
+    elif shoes == "gamer":
+        print ("You have selected the Gamer shoes")
+        index_shoes = 1
         break
-    elif Legs == "king":
-        print ("You have selected the King legs")
-        index_legs = 2
+    elif shoes == "king":
+        print ("You have selected the King shoes")
+        index_shoes = 2
         break
     else:
-        print("Please select one of the given legs")
+        print("Please select one of the given shoes")
 
 print("Player 2 skin select")
 while True:
@@ -92,29 +92,29 @@ while True:
     else:
         print("Please select one of the given bodies")
 while True:
-    Legs2 = input("Select legs (Buisnessman, Gamer, King): ")
-    if Legs2 == "buisnessman":
-        print ("You have selected the Buisnessman legs")
-        index_legs2 = 0
+    shoes2 = input("Select shoes (Buisnessman, Gamer, King): ")
+    if shoes2 == "buisnessman":
+        print ("You have selected the Buisnessman shoes")
+        index_shoes2 = 0
         break
-    elif Legs2 == "gamer":
-        print ("You have selected the Gamer legs")
-        index_legs2 = 1
+    elif shoes2 == "gamer":
+        print ("You have selected the Gamer shoes")
+        index_shoes2 = 1
         break
-    elif Legs2 == "king":
-        print ("You have selected the King legs")
-        index_legs2 = 2
+    elif shoes2 == "king":
+        print ("You have selected the King shoes")
+        index_shoes2 = 2
         break
     else:
-        print("Please select one of the given legs")
+        print("Please select one of the given shoes")
 
 head_item = head_list[index_head]
 body_item = body_list[index_body]
-leg_item = leg_list[index_legs]
+shoe_item = shoe_list[index_shoes]
 
 head_item2 = head_list[index_head2]
 body_item2 = body_list[index_body2]
-leg_item2 = leg_list[index_legs2]
+shoe_item2 = shoe_list[index_shoes2]
 
 
 pygame.init()
@@ -126,7 +126,7 @@ FPS = 60
 
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT), pygame.RESIZABLE)
-bg=pygame.transform.scale(pygame.image.load("background.jpg"), (WIDTH, HEIGHT))
+bg=pygame.transform.scale(pygame.image.load("Images/background.png"), (WIDTH, HEIGHT))
 player_posA = pygame.Vector2(screen.get_width() / 4, screen.get_height() / 2)
 player_posB = pygame.Vector2(3*screen.get_width() / 4, screen.get_height() / 2)
 d_t = 1 / FPS
@@ -151,6 +151,28 @@ class Head:
         for cc in chara_under:
             cc.draw()
 
+class Body(Head):
+    def __init__(self, x, y, width, height, y_shift):
+        super().__init__(x, y, width, height)
+        self.y_shift = y_shift
+    def move(self, _speed):
+        self.x-= _speed * d_t
+    def draw(self):
+        head = pygame.image.load(body_item)
+        scale = pygame.transform.scale(head, (self.width, self.height))
+        screen.blit(scale, (self.x, self.y+self.y_shift))
+
+class Shoe(Head):
+    def __init__(self, x, y, width, height, y_shift):
+        super().__init__(x, y, width, height)
+        self.y_shift = y_shift
+    def move(self, _speed):
+        self.x-= _speed * d_t
+    def draw(self):
+        head = pygame.image.load(body_item)
+        scale = pygame.transform.scale(head, (self.width, self.height))
+        screen.blit(scale, (self.x, self.y+self.y_shift))
+
 class Head2(Head):
     def __init__(self, x, y, width, height, x_shift):
         super().__init__(x, y, width, height)
@@ -159,6 +181,28 @@ class Head2(Head):
         self.x-= _speed * d_t
     def draw(self):
         head = pygame.image.load(head_item2)
+        scale = pygame.transform.scale(head, (self.width, self.height))
+        screen.blit(scale, (self.x+self.x_shift, self.y))
+
+class Body2(Body):
+    def __init__(self, x, y, width, height, y_shift, x_shift):
+        super().__init__(x, y, width, height,y_shift)
+        self.x_shift = x_shift
+    def move(self, _speed):
+        self.x-= _speed * d_t
+    def draw(self):
+        head = pygame.image.load(body_item)
+        scale = pygame.transform.scale(head, (self.width, self.height))
+        screen.blit(scale, (self.x+self.x_shift, self.y))
+
+class Shoe2(Shoe):
+    def __init__(self, x, y, width, height, y_shift, x_shift):
+        super().__init__(x, y, width, height,y_shift)
+        self.x_shift = x_shift
+    def move(self, _speed):
+        self.x-= _speed * d_t
+    def draw(self):
+        head = pygame.image.load(body_item)
         scale = pygame.transform.scale(head, (self.width, self.height))
         screen.blit(scale, (self.x+self.x_shift, self.y))
 
@@ -185,4 +229,3 @@ while True:
     
     clock.tick(FPS)    
     pygame.display.flip()
-      # limits FPS to 60
