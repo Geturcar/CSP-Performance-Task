@@ -223,22 +223,15 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        while time > 0:
-            time = time-1
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LCTRL:
-                    chara.move(speed)
-                elif event.key == pygame.K_RCTRL:
-                    chara.move(-speed)
-
-#Hitansh Is Here
-
-
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LCTRL:
+                chara.move(speed)
+            elif event.key == pygame.K_RCTRL:
+                chara.move(-speed)
 
     screen.blit(bg, (0,0))
 
     chara.draw()
 
-    
     clock.tick(FPS)    
     pygame.display.flip()
