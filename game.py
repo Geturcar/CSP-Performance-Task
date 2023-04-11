@@ -1,4 +1,5 @@
 import pygame, sys
+import random
 
 head_list = ["Images/head1.png","Images/head2.png", "Images/head3.png"]
 body_list = ["Images/body1.png","Images/body2.png", "Images/body3.png"]
@@ -7,9 +8,9 @@ shoe_list = ["Images/shoe1.png","Images/shoe2.png", "Images/shoe3.png"]
 print("Player 1 skin select")
 
 while True:
-    Head = input("Select a head (Buisnessman, Gamer, King): ")
-    if Head == "buisnessman":
-        print ("You have selected the Buisnessman head")
+    Head = input("Select a head (businessman, Gamer, King): ")
+    if Head == "businessman":
+        print ("You have selected the businessman head")
         index_head = 0
         break
     elif Head == "gamer":
@@ -25,9 +26,9 @@ while True:
 
 print("body")
 while True:
-    Body = input("Select a body (Buisnessman, Gamer, King): ")
-    if Body == "buisnessman":
-        print ("You have selected the Buisnessman body")
+    Body = input("Select a body (businessman, Gamer, King): ")
+    if Body == "businessman":
+        print ("You have selected the businessman body")
         index_body = 0
         break
     elif Body == "gamer":
@@ -41,9 +42,9 @@ while True:
     else:
         print("Please select one of the given bodies")
 while True:
-    shoes = input("Select shoes (Buisnessman, Gamer, King): ")
-    if shoes == "buisnessman":
-        print ("You have selected the Buisnessman shoes")
+    shoes = input("Select shoes (businessman, Gamer, King): ")
+    if shoes == "businessman":
+        print ("You have selected the businessman shoes")
         index_shoes = 0
         break
     elif shoes == "gamer":
@@ -59,9 +60,9 @@ while True:
 
 print("Player 2 skin select")
 while True:
-    Head2 = input("Select a head (Buisnessman, Gamer, King): ")
-    if Head2 == "buisnessman":
-        print ("You have selected the Buisnessman head")
+    Head2 = input("Select a head (businessman, Gamer, King): ")
+    if Head2 == "businessman":
+        print ("You have selected the businessman head")
         index_head2 = 0
         break
     elif Head2 == "gamer":
@@ -76,9 +77,9 @@ while True:
         print("Please select one of the given heads")  
 
 while True:
-    Body2 = input("Select a body (Buisnessman, Gamer, King): ")
-    if Body2 == "buisnessman":
-        print("You have selected the Buisnessman body")
+    Body2 = input("Select a body (businessman, Gamer, King): ")
+    if Body2 == "businessman":
+        print("You have selected the businessman body")
         index_body2 = 0
         break
     elif Body2 == "gamer":
@@ -92,9 +93,9 @@ while True:
     else:
         print("Please select one of the given bodies")
 while True:
-    shoes2 = input("Select shoes (Buisnessman, Gamer, King): ")
-    if shoes2 == "buisnessman":
-        print ("You have selected the Buisnessman shoes")
+    shoes2 = input("Select shoes (businessman, Gamer, King): ")
+    if shoes2 == "businessman":
+        print ("You have selected the businessman shoes")
         index_shoes2 = 0
         break
     elif shoes2 == "gamer":
@@ -117,12 +118,18 @@ body_item2 = body_list[index_body2]
 shoe_item2 = shoe_list[index_shoes2]
 
 
+
+
+
 pygame.init()
 clock = pygame.time.Clock()
 
 WIDTH = 1200
 HEIGHT = 600
 FPS = 60
+
+#end_game = pygame.image.load("Images/endgame.png")
+
 
 
 screen = pygame.display.set_mode((WIDTH,HEIGHT), pygame.RESIZABLE)
@@ -133,6 +140,8 @@ d_t = 1 / FPS
 Char1_posx= 200
 Char1_posy= 200
 speed=1000
+
+#screen.blit()
 
 class Head:
     def __init__(self, x,y,width, height):
@@ -184,7 +193,7 @@ class Head2(Head):
         scale = pygame.transform.scale(head, (self.width, self.height))
         screen.blit(scale, (self.x+self.x_shift, self.y))
 
-class Body2(Body):
+class Body2(Head):
     def __init__(self, x, y, width, height, y_shift, x_shift):
         super().__init__(x, y, width, height,y_shift)
         self.x_shift = x_shift
@@ -208,23 +217,27 @@ class Shoe2(Shoe):
 
 chara = Head(Char1_posx, Char1_posy, 50,50)
 chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800), Head2(Char1_posx, Char1_posy+20,800, 10,0)]
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LCTRL:
-                chara.move(speed)
-            elif event.key == pygame.K_RCTRL:
-                chara.move(-speed)
+        while time > 0:
+            time = time-1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LCTRL:
+                    chara.move(speed)
+                elif event.key == pygame.K_RCTRL:
+                    chara.move(-speed)
+
+
 
 
 
     screen.blit(bg, (0,0))
 
     chara.draw()
-
 
     
     clock.tick(FPS)    
