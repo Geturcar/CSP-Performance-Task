@@ -117,7 +117,7 @@ head_item2 = head_list[index_head2]
 body_item2 = body_list[index_body2]
 shoe_item2 = shoe_list[index_shoes2]
 
-
+rope = "Images/Rope.png"
 
 
 
@@ -128,10 +128,6 @@ WIDTH = 1200
 HEIGHT = 600
 FPS = 60
 
-#end_game = pygame.image.load("Images/endgame.png")
-
-
-
 screen = pygame.display.set_mode((WIDTH,HEIGHT), pygame.RESIZABLE)
 bg=pygame.transform.scale(pygame.image.load("Images/background.png"), (WIDTH, HEIGHT))
 player_posA = pygame.Vector2(screen.get_width() / 4, screen.get_height() / 2)
@@ -141,83 +137,53 @@ Char1_posx= 200
 Char1_posy= 200
 speed=1000
 
-#screen.blit()
-
 class Head:
-    def __init__(self, x,y,width, height):
+    def __init__(self, x,y,width, height,image):
         self.x= x
         self.y= y
         self.width = width
         self.height = height
+        self.image = image
     def move(self, _speed):
         self.x-= _speed * d_t
         for cc in chara_under:
             cc.move(_speed)
     def draw(self):
-        head = pygame.image.load(head_item)
+        head = pygame.image.load(self.image)
         scale = pygame.transform.scale(head, (self.width, self.height))
         screen.blit(scale, (self.x, self.y))
         for cc in chara_under:
             cc.draw()
 
-class Body(Head):
-    def __init__(self, x, y, width, height, y_shift):
-        super().__init__(x, y, width, height)
-        self.y_shift = y_shift
-    def move(self, _speed):
-        self.x-= _speed * d_t
-    def draw(self):
-        head = pygame.image.load(body_item)
-        scale = pygame.transform.scale(head, (self.width, self.height))
-        screen.blit(scale, (self.x, self.y+self.y_shift))
-
-class Shoe(Head):
-    def __init__(self, x, y, width, height, y_shift):
-        super().__init__(x, y, width, height)
-        self.y_shift = y_shift
-    def move(self, _speed):
-        self.x-= _speed * d_t
-    def draw(self):
-        head = pygame.image.load(body_item)
-        scale = pygame.transform.scale(head, (self.width, self.height))
-        screen.blit(scale, (self.x, self.y+self.y_shift))
-
 class Head2(Head):
-    def __init__(self, x, y, width, height, x_shift):
-        super().__init__(x, y, width, height)
+    def __init__(self, x, y, width, height, x_shift,y_shift,image):
+        super().__init__(x, y, width, height,image)
         self.x_shift = x_shift
+        self.y_shift = y_shift
     def move(self, _speed):
         self.x-= _speed * d_t
     def draw(self):
-        head = pygame.image.load(head_item2)
+        head = pygame.image.load(self.image)
         scale = pygame.transform.scale(head, (self.width, self.height))
-        screen.blit(scale, (self.x+self.x_shift, self.y))
-
-class Body2(Head):
-    def __init__(self, x, y, width, height, y_shift, x_shift):
-        super().__init__(x, y, width, height,y_shift)
-        self.x_shift = x_shift
-    def move(self, _speed):
-        self.x-= _speed * d_t
-    def draw(self):
-        head = pygame.image.load(body_item)
-        scale = pygame.transform.scale(head, (self.width, self.height))
-        screen.blit(scale, (self.x+self.x_shift, self.y))
-
-class Shoe2(Shoe):
-    def __init__(self, x, y, width, height, y_shift, x_shift):
-        super().__init__(x, y, width, height,y_shift)
-        self.x_shift = x_shift
-    def move(self, _speed):
-        self.x-= _speed * d_t
-    def draw(self):
-        head = pygame.image.load(body_item)
-        scale = pygame.transform.scale(head, (self.width, self.height))
-        screen.blit(scale, (self.x+self.x_shift, self.y))
-
-chara = Head(Char1_posx, Char1_posy, 50,50)
-chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800), Head2(Char1_posx, Char1_posy+20,800, 10,0)]
-
+        screen.blit(scale, (self.x+self.x_shift, self.y+self.y_shift))
+chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,head_item2), 
+               Head2(Char1_posx, Char1_posy,800, 600,0,20,rope),
+               Head2(Char1_posx, Char1_posy, 50,50, 800,50,body_item2),
+               Head2(Char1_posx, Char1_posy, 50,50, 800,100,shoe_item2),
+               Head2(Char1_posx, Char1_posy, 50,50,0,50, body_item),
+               Head2(Char1_posx, Char1_posy, 50,50,0,100, shoe_item)]
+zone = 1100
+status = True
+def movement():
+    global status
+    if chara.x <= WIDTH//2 - zone//2:
+        status = False
+    if chara_under[0].x >= WIDTH//2 + zone//2:
+        status = False
+    if chara.x <= 0:
+        status = False
+    if chara_under[0].x >= WIDTH:
+        status = False
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -228,7 +194,9 @@ while True:
                 chara.move(speed)
             elif event.key == pygame.K_RCTRL:
                 chara.move(-speed)
-
+    movement()
+    if status == False:
+        speed = 0
     screen.blit(bg, (0,0))
 
     chara.draw()
