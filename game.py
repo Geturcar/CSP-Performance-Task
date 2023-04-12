@@ -166,6 +166,8 @@ class Head2(Head):
         head = pygame.image.load(self.image)
         scale = pygame.transform.scale(head, (self.width, self.height))
         screen.blit(scale, (self.x+self.x_shift, self.y+self.y_shift))
+
+chara = Head(Char1_posx, Char1_posy, 50,50,head_item)
 chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,head_item2), 
                Head2(Char1_posx, Char1_posy,800, 600,0,20,rope),
                Head2(Char1_posx, Char1_posy, 50,50, 800,50,body_item2),
