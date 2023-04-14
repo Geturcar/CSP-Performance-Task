@@ -127,14 +127,15 @@ clock = pygame.time.Clock()
 WIDTH = 1200
 HEIGHT = 600
 FPS = 60
+BLACK = (0, 0, 0)
 
-screen = pygame.display.set_mode((WIDTH,HEIGHT), pygame.RESIZABLE)
+screen = pygame.display.set_mode((WIDTH,HEIGHT), pygame.SHOWN)
 bg=pygame.transform.scale(pygame.image.load("Images/background.png"), (WIDTH, HEIGHT))
 player_posA = pygame.Vector2(screen.get_width() / 4, screen.get_height() / 2)
 player_posB = pygame.Vector2(3*screen.get_width() / 4, screen.get_height() / 2)
 d_t = 1 / FPS
 Char1_posx= 200
-Char1_posy= 200
+Char1_posy= HEIGHT - 202.5
 speed=1000
 
 class Head:
@@ -149,8 +150,7 @@ class Head:
         for cc in chara_under:
             cc.move(_speed)
     def draw(self):
-        head = pygame.image.load(self.image)
-        scale = pygame.transform.scale(head, (self.width, self.height))
+        scale = pygame.transform.scale(self.image, (self.width, self.height))
         screen.blit(scale, (self.x, self.y))
         for cc in chara_under:
             cc.draw()
@@ -163,29 +163,33 @@ class Head2(Head):
     def move(self, _speed):
         self.x-= _speed * d_t
     def draw(self):
-        head = pygame.image.load(self.image)
-        scale = pygame.transform.scale(head, (self.width, self.height))
+        scale = pygame.transform.scale(self.image, (self.width, self.height))
         screen.blit(scale, (self.x+self.x_shift, self.y+self.y_shift))
 
-chara = Head(Char1_posx, Char1_posy, 50,50,head_item)
-chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,head_item2), 
-               Head2(Char1_posx, Char1_posy,800, 600,0,20,rope),
-               Head2(Char1_posx, Char1_posy, 50,50, 800,50,body_item2),
-               Head2(Char1_posx, Char1_posy, 50,50, 800,100,shoe_item2),
-               Head2(Char1_posx, Char1_posy, 50,50,0,50, body_item),
-               Head2(Char1_posx, Char1_posy, 50,50,0,100, shoe_item)]
+chara = Head(Char1_posx, Char1_posy, 50,50,pygame.image.load(head_item))
+chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,pygame.transform.flip(pygame.image.load(head_item2), True, False)), 
+               Head2(Char1_posx, Char1_posy,800, 100,11,10,pygame.image.load(rope)),
+               Head2(Char1_posx, Char1_posy, 50,50, 800,50,pygame.transform.flip(pygame.image.load(body_item2), True, False)),
+               Head2(Char1_posx, Char1_posy, 45,35, 795,98,pygame.transform.flip(pygame.image.load(shoe_item2), True, False)),
+               Head2(Char1_posx, Char1_posy, 50,50,0,50, pygame.image.load(body_item)),
+               Head2(Char1_posx, Char1_posy, 45,35,5,98, pygame.image.load(shoe_item))]
 zone = 1100
 status = True
+won_player = ''
+shift_var = WIDTH / 2 - 400 - 50
+trans_dict = {'Player 1': -1, 'Player 2': 1}
+
 def movement():
-    global status
+    global status, won_player
     if chara.x <= WIDTH//2 - zone//2:
         status = False
-    if chara_under[0].x >= WIDTH//2 + zone//2:
+        won_player = 'Player 1'
+    if chara_under[0].x + 832 >= WIDTH//2 + zone//2:
         status = False
-    if chara.x <= 0:
-        status = False
-    if chara_under[0].x >= WIDTH:
-        status = False
+        won_player = 'Player 2'
+
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -197,11 +201,14 @@ while True:
             elif event.key == pygame.K_RCTRL:
                 chara.move(-speed)
     movement()
-    if status == False:
-        speed = 0
     screen.blit(bg, (0,0))
 
     chara.draw()
+
+    if status == False:
+        speed = 0
+        text = pygame.font.SysFont('Impact', 70).render(f'{won_player} WINS', False, BLACK)
+        screen.blit(text, text.get_rect(center=(WIDTH/2 + trans_dict[won_player] * shift_var, HEIGHT/2)))
 
     clock.tick(FPS)    
     pygame.display.flip()
