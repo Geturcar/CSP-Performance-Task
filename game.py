@@ -1,5 +1,4 @@
 import pygame, sys
-import random
 
 head_list = ["Images/head1.png","Images/head2.png", "Images/head3.png"]
 body_list = ["Images/body1.png","Images/body2.png", "Images/body3.png"]
@@ -170,9 +169,9 @@ chara = Head(Char1_posx, Char1_posy, 50,50,pygame.image.load(head_item))
 chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,pygame.transform.flip(pygame.image.load(head_item2), True, False)), 
                Head2(Char1_posx, Char1_posy,800, 100,11,10,pygame.image.load(rope)),
                Head2(Char1_posx, Char1_posy, 50,50, 800,50,pygame.transform.flip(pygame.image.load(body_item2), True, False)),
-               Head2(Char1_posx, Char1_posy, 45,35, 795,98,pygame.transform.flip(pygame.image.load(shoe_item2), True, False)),
+               Head2(Char1_posx, Char1_posy, 50,25, 795,98,pygame.transform.flip(pygame.image.load(shoe_item2), True, False)),
                Head2(Char1_posx, Char1_posy, 50,50,0,50, pygame.image.load(body_item)),
-               Head2(Char1_posx, Char1_posy, 45,35,5,98, pygame.image.load(shoe_item))]
+               Head2(Char1_posx, Char1_posy, 50,25,5,98, pygame.image.load(shoe_item))]
 zone = 1100
 status = True
 won_player = ''
