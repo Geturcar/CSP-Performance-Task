@@ -134,7 +134,7 @@ player_posA = pygame.Vector2(screen.get_width() / 4, screen.get_height() / 2)
 player_posB = pygame.Vector2(3*screen.get_width() / 4, screen.get_height() / 2)
 d_t = 1 / FPS
 Char1_posx= 200
-Char1_posy= HEIGHT - 202.5
+Char1_posy= HEIGHT - 195
 speed=1000
 
 class Head:
@@ -178,12 +178,12 @@ won_player = ''
 shift_var = WIDTH / 2 - 400 - 50
 trans_dict = {'Player 1': -1, 'Player 2': 1}
 
-def movement():
+def win(position):
     global status, won_player
-    if chara.x <= WIDTH//2 - zone//2:
+    if position <= WIDTH//2 - zone//2:
         status = False
         won_player = 'Player 1'
-    if chara_under[0].x + 832 >= WIDTH//2 + zone//2:
+    if position + 832 >= WIDTH//2 + zone//2:
         status = False
         won_player = 'Player 2'
 
@@ -199,7 +199,7 @@ while True:
                 chara.move(speed)
             elif event.key == pygame.K_RCTRL:
                 chara.move(-speed)
-    movement()
+    win(chara.x)
     screen.blit(bg, (0,0))
 
     chara.draw()
