@@ -7,16 +7,16 @@ shoe_list = ["Images/shoe1.png","Images/shoe2.png", "Images/shoe3.png"]
 print("Player 1 skin select")
 
 while True:
-    Head = input("Select a head (businessman, Gamer, King): ")
-    if Head == "businessman":
+    Main = input("Select a head (businessman, Gamer, King): ")
+    if Main == "businessman":
         print ("You have selected the businessman head")
         index_head = 0
         break
-    elif Head == "gamer":
+    elif Main == "gamer":
         print ("You have selected the Gamer head")
         index_head = 1
         break
-    elif Head == "king":
+    elif Main == "king":
         print ("You have selected the King head")
         index_head = 2
         break
@@ -59,16 +59,16 @@ while True:
 
 print("Player 2 skin select")
 while True:
-    Head2 = input("Select a head (businessman, Gamer, King): ")
-    if Head2 == "businessman":
+    Object = input("Select a head (businessman, Gamer, King): ")
+    if Object == "businessman":
         print ("You have selected the businessman head")
         index_head2 = 0
         break
-    elif Head2 == "gamer":
+    elif Object == "gamer":
         print ("You have selected the Gamer head")
         index_head2 = 1
         break
-    elif Head2 == "king":
+    elif Object == "king":
         print ("You have selected the King head")
         index_head2 = 2
         break
@@ -137,7 +137,7 @@ Char1_posx= 200
 Char1_posy= HEIGHT - 195
 speed=1000
 
-class Head:
+class Main:
     def __init__(self, x,y,width, height,image):
         self.x= x
         self.y= y
@@ -154,7 +154,7 @@ class Head:
         for cc in chara_under:
             cc.draw()
 
-class Head2(Head):
+class Object(Main):
     def __init__(self, x, y, width, height, x_shift,y_shift,image):
         super().__init__(x, y, width, height,image)
         self.x_shift = x_shift
@@ -165,13 +165,13 @@ class Head2(Head):
         scale = pygame.transform.scale(self.image, (self.width, self.height))
         screen.blit(scale, (self.x+self.x_shift, self.y+self.y_shift))
 
-chara = Head(Char1_posx, Char1_posy, 50,50,pygame.image.load(head_item))
-chara_under = [Head2(Char1_posx, Char1_posy, 50,50, 800,0,pygame.transform.flip(pygame.image.load(head_item2), True, False)), 
-               Head2(Char1_posx, Char1_posy,800, 100,11,10,pygame.image.load(rope)),
-               Head2(Char1_posx, Char1_posy, 50,50, 800,50,pygame.transform.flip(pygame.image.load(body_item2), True, False)),
-               Head2(Char1_posx, Char1_posy, 50,25, 795,98,pygame.transform.flip(pygame.image.load(shoe_item2), True, False)),
-               Head2(Char1_posx, Char1_posy, 50,50,0,50, pygame.image.load(body_item)),
-               Head2(Char1_posx, Char1_posy, 50,25,5,98, pygame.image.load(shoe_item))]
+chara = Main(Char1_posx, Char1_posy, 50,50,pygame.image.load(head_item))
+chara_under = [Object(Char1_posx, Char1_posy, 50,50, 800,0,pygame.transform.flip(pygame.image.load(head_item2), True, False)), 
+               Object(Char1_posx, Char1_posy,800, 100,11,10,pygame.image.load(rope)),
+               Object(Char1_posx, Char1_posy, 50,50, 800,50,pygame.transform.flip(pygame.image.load(body_item2), True, False)),
+               Object(Char1_posx, Char1_posy, 50,25, 795,98,pygame.transform.flip(pygame.image.load(shoe_item2), True, False)),
+               Object(Char1_posx, Char1_posy, 50,50,0,50, pygame.image.load(body_item)),
+               Object(Char1_posx, Char1_posy, 50,25,5,98, pygame.image.load(shoe_item))]
 zone = 1100
 status = True
 won_player = ''
