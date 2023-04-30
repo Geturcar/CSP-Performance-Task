@@ -200,6 +200,7 @@ while True:
             elif event.key == pygame.K_RCTRL:
                 chara.move(-speed)
     win(chara.x)
+    print(chara.x)
     screen.blit(bg, (0,0))
 
     chara.draw()
